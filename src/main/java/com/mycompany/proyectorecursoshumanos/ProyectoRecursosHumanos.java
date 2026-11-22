@@ -1,7 +1,7 @@
 package com.mycompany.proyectorecursoshumanos;
 
 public class ProyectoRecursosHumanos {
-    public staticmain(String[] args) {
+    public void main(String[] args) {
         // Instanciamos el controlador que maneja el ArrayList
         ControladorRH sistema = new ControladorRH();
 
