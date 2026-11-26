@@ -4,9 +4,10 @@
  */
 package com.mycompany.proyectorecursoshumanos;
 
+import javax.swing.JOptionPane;
 /**
  *
- * @author julia
+ * @author julio
  */
 public class FrmGestionEmpleados extends javax.swing.JFrame {
     
@@ -71,20 +72,26 @@ public class FrmGestionEmpleados extends javax.swing.JFrame {
         jLabel5.setText("Departamento:");
 
         cmbDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Tecnología, ", "Recursos Humanos, ", "Ventas, ", "Contabilidad, ", "Administración" }));
+        cmbDepartamento.addActionListener(this::cmbDepartamentoActionPerformed);
 
         jLabel6.setText("Puesto:");
 
         jLabel7.setText("Salario ($) :");
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
 
         btnModificar.setText("Modificar");
+        btnModificar.addActionListener(this::btnModificarActionPerformed);
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(this::btnEliminarActionPerformed);
 
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(this::btnLimpiarActionPerformed);
 
         tblEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -220,6 +227,174 @@ public class FrmGestionEmpleados extends javax.swing.JFrame {
     private void txtIdentificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdentificacionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdentificacionActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // Obtener datos ingresados por el usuario
+String identificacion = txtIdentificacion.getText();
+String nombre = txtNombre.getText();
+String correo = txtCorreo.getText();
+String puesto = txtPuesto.getText();
+
+// Validar campos vacíos
+if (Validaciones.campoVacio(identificacion)
+        || Validaciones.campoVacio(nombre)
+        || Validaciones.campoVacio(correo)
+        || Validaciones.campoVacio(puesto)
+        || Validaciones.campoVacio(txtSalario.getText())) {
+
+    JOptionPane.showMessageDialog(
+            this,
+            "Todos los campos son obligatorios.",
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+
+    return;
+}
+if (cmbDepartamento.getSelectedIndex() == 0) {
+
+    JOptionPane.showMessageDialog(
+            this,
+            "Debe seleccionar un departamento.",
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+
+    return;
+}
+// Validar formato de cédula
+if (!Validaciones.cedulaValida(identificacion)) {
+
+    JOptionPane.showMessageDialog(
+            this,
+            "La identificación debe contener 9 dígitos.",
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+
+    return;
+}
+
+// Validar correo electrónico
+if (!Validaciones.correoValido(correo)) {
+
+    JOptionPane.showMessageDialog(
+            this,
+            "Correo electrónico inválido.",
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+
+    return;
+}
+
+// Manejo de excepciones para salario
+double salario;
+
+try {
+
+    salario = Double.parseDouble(txtSalario.getText());
+
+} catch (NumberFormatException e) {
+
+    JOptionPane.showMessageDialog(
+            this,
+            "El salario debe ser un número válido.",
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+
+    return;
+}
+
+// Validar salario positivo
+if (!Validaciones.salarioValido(salario)) {
+
+    JOptionPane.showMessageDialog(
+            this,
+            "El salario debe ser mayor que cero.",
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+
+    return;
+}
+
+// Confirmación de validación exitosa
+JOptionPane.showMessageDialog(
+        this,
+        "Datos validados correctamente.",
+        "Información",
+        JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        JOptionPane.showMessageDialog(
+        this,
+        "Empleado no encontrado.",
+        "Advertencia",
+        JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int opcion = JOptionPane.showConfirmDialog(
+        this,
+        "¿Desea eliminar este empleado?",
+        "Confirmar eliminación",
+        JOptionPane.YES_NO_OPTION);
+
+if (opcion == JOptionPane.YES_OPTION) {
+
+    JOptionPane.showMessageDialog(
+            this,
+            "Empleado eliminado correctamente.");
+
+}
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+      String identificacion = txtIdentificacion.getText();
+    String nombre = txtNombre.getText();
+    String correo = txtCorreo.getText();
+    String puesto = txtPuesto.getText();
+
+    if (Validaciones.campoVacio(identificacion)
+            || Validaciones.campoVacio(nombre)
+            || Validaciones.campoVacio(correo)
+            || Validaciones.campoVacio(puesto)
+            || Validaciones.campoVacio(txtSalario.getText())) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Todos los campos son obligatorios.",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+
+        return;
+    }
+
+    JOptionPane.showMessageDialog(
+            this,
+            "Datos modificados correctamente.",
+            "Información",
+            JOptionPane.INFORMATION_MESSAGE);
+
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void cmbDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDepartamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbDepartamentoActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtIdentificacion.setText("");
+    txtNombre.setText("");
+    txtCorreo.setText("");
+    txtPuesto.setText("");
+    txtSalario.setText("");
+
+    cmbDepartamento.setSelectedIndex(0);
+
+    JOptionPane.showMessageDialog(
+            this,
+            "Formulario limpiado correctamente.",
+            "Información",
+            JOptionPane.INFORMATION_MESSAGE);
+
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     /**
      * @param args the command line arguments
