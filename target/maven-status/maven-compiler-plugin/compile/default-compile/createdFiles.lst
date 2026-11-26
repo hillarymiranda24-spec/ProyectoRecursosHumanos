@@ -1,4 +1,6 @@
 com\mycompany\proyectorecursoshumanos\ProyectoRecursosHumanos.class
-ControladorRH.class
-Persona.class
-Empleado.class
+com\mycompany\proyectorecursoshumanos\ControladorRH.class
+com\mycompany\proyectorecursoshumanos\Persona.class
+com\mycompany\proyectorecursoshumanos\FrmGestionEmpleados$1.class
+com\mycompany\proyectorecursoshumanos\FrmGestionEmpleados.class
+com\mycompany\proyectorecursoshumanos\Empleado.class
