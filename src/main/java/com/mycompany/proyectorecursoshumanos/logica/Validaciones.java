@@ -1,4 +1,4 @@
-package com.mycompany.proyectorecursoshumanos;
+package com.mycompany.proyectorecursoshumanos.logica;
 
 /**
  * Clase encargada de validar datos ingresados por el usuario.

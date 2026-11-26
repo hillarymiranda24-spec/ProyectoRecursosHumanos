@@ -1,6 +1,9 @@
-package com.mycompany.proyectorecursoshumanos;
+package com.mycompany.proyectorecursoshumanos.modelo;
 
 // Clase hija que hereda de Persona
+
+import com.mycompany.proyectorecursoshumanos.modelo.Persona;
+
 public class Empleado extends Persona {
     private String departamento;
     private String puesto;

@@ -1,4 +1,4 @@
-package com.mycompany.proyectorecursoshumanos;
+package com.mycompany.proyectorecursoshumanos.modelo;
 
 // Clase base que representa a una persona genérica
 public class Persona {

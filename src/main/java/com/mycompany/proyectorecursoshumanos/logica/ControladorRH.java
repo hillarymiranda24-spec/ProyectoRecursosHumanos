@@ -1,5 +1,6 @@
-package com.mycompany.proyectorecursoshumanos;
+package com.mycompany.proyectorecursoshumanos.logica;
 
+import com.mycompany.proyectorecursoshumanos.modelo.Empleado;
 import java.util.ArrayList;
 
 public class ControladorRH {
