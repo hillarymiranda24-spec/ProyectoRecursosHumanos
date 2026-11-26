@@ -2,7 +2,7 @@ package com.mycompany.proyectorecursoshumanos;
 
 /**
  * Clase encargada de validar datos ingresados por el usuario.
- * Autora: Katherine Dayana Monge Molina
+ * Autora: Katherine
  */
 public class Validaciones {
 

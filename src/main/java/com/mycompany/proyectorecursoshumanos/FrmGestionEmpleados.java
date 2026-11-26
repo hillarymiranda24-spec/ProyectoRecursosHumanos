@@ -78,6 +78,8 @@ public class FrmGestionEmpleados extends javax.swing.JFrame {
 
         jLabel7.setText("Salario ($) :");
 
+        txtSalario.addActionListener(this::txtSalarioActionPerformed);
+
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
@@ -395,6 +397,10 @@ if (opcion == JOptionPane.YES_OPTION) {
             JOptionPane.INFORMATION_MESSAGE);
 
     }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void txtSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSalarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSalarioActionPerformed
 
     /**
      * @param args the command line arguments
