@@ -1,24 +1,27 @@
 package com.mycompany.proyectorecursoshumanos;
 
 /**
- * Clase encargada de validar datos ingresados por el usuario.
- * Autora: Katherine
+ * Clase para validar los datos ingresados en el formulario.
+ *
+ * @author Katherine
  */
 public class Validaciones {
 
     /**
      * Verifica si un campo está vacío.
-     * @param texto
-     * @return 
+     *
+     * @param texto texto a validar
+     * @return true si está vacío, false si contiene datos
      */
     public static boolean campoVacio(String texto) {
         return texto == null || texto.trim().isEmpty();
     }
 
     /**
-     * Valida que la cédula tenga exactamente 9 números.
-     * @param cedula
-     * @return 
+     * Valida que la identificación tenga exactamente 9 dígitos.
+     *
+     * @param cedula identificación a validar
+     * @return true si es válida
      */
     public static boolean cedulaValida(String cedula) {
 
@@ -30,9 +33,10 @@ public class Validaciones {
     }
 
     /**
-     * Valida que el correo tenga @ y .
-     * @param correo
-     * @return 
+     * Valida el formato del correo electrónico.
+     *
+     * @param correo correo a validar
+     * @return true si es válido
      */
     public static boolean correoValido(String correo) {
 
@@ -40,17 +44,16 @@ public class Validaciones {
             return false;
         }
 
-        return correo.contains("@")
-                && correo.contains(".");
+        return correo.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
     }
 
     /**
      * Valida que el salario sea mayor que cero.
-     * @param salario
-     * @return 
+     *
+     * @param salario salario a validar
+     * @return true si es válido
      */
     public static boolean salarioValido(double salario) {
         return salario > 0;
     }
-
 }

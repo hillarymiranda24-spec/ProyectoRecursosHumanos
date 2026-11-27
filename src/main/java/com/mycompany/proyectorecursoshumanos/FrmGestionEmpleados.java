@@ -52,10 +52,37 @@ public class FrmGestionEmpleados extends javax.swing.JFrame {
         String puesto = txtPuesto.getText().trim();
         String salarioTexto = txtSalario.getText().trim().replace(",", ".");
 
-        if (id.isEmpty() || nombre.isEmpty() || correo.isEmpty() || puesto.isEmpty() || salarioTexto.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Complete todos los campos antes de continuar.");
-            return null;
-        }
+       if (Validaciones.campoVacio(id)
+        || Validaciones.campoVacio(nombre)
+        || Validaciones.campoVacio(correo)
+        || Validaciones.campoVacio(puesto)
+        || Validaciones.campoVacio(salarioTexto)) {
+
+    javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Complete todos los campos antes de continuar."
+    );
+    return null;
+}
+       if (!Validaciones.cedulaValida(id)) {
+
+    javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "La identificación debe tener exactamente 9 dígitos."
+    );
+
+    return null;
+}
+
+if (!Validaciones.correoValido(correo)) {
+
+    javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Ingrese un correo electrónico válido."
+    );
+
+    return null;
+}
 
         if (cmbDepartamento.getSelectedIndex() <= 0 || departamento.equalsIgnoreCase("Seleccione...")) {
             javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un departamento válido.");
