@@ -10,8 +10,8 @@ package com.mycompany.proyectorecursoshumanos;
  */
 public class FrmGestionEmpleados extends javax.swing.JFrame {
     
-    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmGestionEmpleados.class.getName());
+
     private final ControladorRH controlador = new ControladorRH();
 
     private void limpiarCampos() {
@@ -95,13 +95,14 @@ public class FrmGestionEmpleados extends javax.swing.JFrame {
     /**
      * Creates new form FrmGestionEmpleados
      */
-public FrmGestionEmpleados() {
+    public FrmGestionEmpleados() {
         initComponents();
-        // Centrar la ventana en la pantalla y definir título
-        this.setLocationRelativeTo(null);
-        this.setTitle("Gestión de Empleados - Recursos Humanos");
         actualizarTabla();
+        // Centrar la ventana en la pantalla y definir título
+    this.setLocationRelativeTo(null);
+    this.setTitle("Gestión de Empleados - Recursos Humanos");
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -151,10 +152,15 @@ public FrmGestionEmpleados() {
         jLabel5.setText("Departamento:");
 
         cmbDepartamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Tecnología, ", "Recursos Humanos, ", "Ventas, ", "Contabilidad, ", "Administración" }));
+        cmbDepartamento.addActionListener(this::cmbDepartamentoActionPerformed);
 
         jLabel6.setText("Puesto:");
 
+        txtPuesto.addActionListener(this::txtPuestoActionPerformed);
+
         jLabel7.setText("Salario ($) :");
+
+        txtSalario.addActionListener(this::txtSalarioActionPerformed);
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(this::btnGuardarActionPerformed);
@@ -311,102 +317,131 @@ public FrmGestionEmpleados() {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdentificacionActionPerformed
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-Empleado nuevo = construirEmpleadoDesdeFormulario();
-if (nuevo == null) {
-    return;
+    private void txtPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPuestoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPuestoActionPerformed
+private void cmbDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {
+    // TODO add your handling code here:
 }
 
-if (controlador.agregarEmpleado(nuevo)) {
-    actualizarTabla();
-    limpiarCampos();
-    javax.swing.JOptionPane.showMessageDialog(this, "Empleado guardado correctamente.");
-} else {
-    javax.swing.JOptionPane.showMessageDialog(this, "Ya existe un empleado registrado con esa identificación.");
-}        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-String id = txtIdentificacion.getText().trim();
-if (id.isEmpty()) {
-    javax.swing.JOptionPane.showMessageDialog(this, "Ingrese una identificación para buscar.");
-    return;
+private void txtSalarioActionPerformed(java.awt.event.ActionEvent evt) {
+    // TODO add your handling code here:
 }
 
-Empleado encontrado = controlador.buscarPorIdentificacion(id);
-if (encontrado != null) {
-    txtIdentificacion.setText(encontrado.getIdentificacion());
-    txtNombre.setText(encontrado.getNombre());
-    txtCorreo.setText(encontrado.getCorreo());
-    seleccionarDepartamentoEnCombo(encontrado.getDepartamento());
-    txtPuesto.setText(encontrado.getPuesto());
-    txtSalario.setText(String.valueOf(encontrado.getSalario()));
-    txtIdentificacion.setEditable(false);
-} else {
-    javax.swing.JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con esa identificación.");
-}        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarActionPerformed
+private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {
+    Empleado emp = construirEmpleadoDesdeFormulario();
+    if (emp == null) {
+        return;
+    }
 
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-Empleado editado = construirEmpleadoDesdeFormulario();
-if (editado == null) {
-    return;
-}
-
-if (controlador.actualizarEmpleado(editado)) {
-    actualizarTabla();
-    limpiarCampos();
-    javax.swing.JOptionPane.showMessageDialog(this, "Empleado actualizado correctamente.");
-} else {
-    javax.swing.JOptionPane.showMessageDialog(this, "No se encontró el empleado para modificar.");
-}        // TODO add your handling code here:
-    }//GEN-LAST:event_btnModificarActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-String id = txtIdentificacion.getText().trim();
-if (id.isEmpty()) {
-    javax.swing.JOptionPane.showMessageDialog(this, "Seleccione una fila o ingrese una identificación para eliminar.");
-    return;
-}
-
-int opcion = javax.swing.JOptionPane.showConfirmDialog(
-        this,
-        "¿Seguro que deseas eliminar al empleado con ID " + id + "?",
-        "Confirmar eliminación",
-        javax.swing.JOptionPane.YES_NO_OPTION
-);
-
-if (opcion == javax.swing.JOptionPane.YES_OPTION) {
-    if (controlador.eliminarEmpleado(id)) {
+    if (controlador.agregarEmpleado(emp)) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Empleado guardado correctamente.");
         actualizarTabla();
         limpiarCampos();
-        javax.swing.JOptionPane.showMessageDialog(this, "Empleado eliminado correctamente.");
     } else {
-        javax.swing.JOptionPane.showMessageDialog(this, "No se encontró el empleado a eliminar.");
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Ya existe un empleado con esa identificación.",
+                "Duplicado",
+                javax.swing.JOptionPane.WARNING_MESSAGE
+        );
     }
-}        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-limpiarCampos();        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLimpiarActionPerformed
-
-    private void tblEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpleadosMouseClicked
-      int fila = tblEmpleados.getSelectedRow();
-if (fila < 0) {
-    return;
 }
 
-javax.swing.table.TableModel modelo = tblEmpleados.getModel();
-txtIdentificacion.setText(String.valueOf(modelo.getValueAt(fila, 0)));
-txtNombre.setText(String.valueOf(modelo.getValueAt(fila, 1)));
-txtCorreo.setText(String.valueOf(modelo.getValueAt(fila, 2)));
-seleccionarDepartamentoEnCombo(String.valueOf(modelo.getValueAt(fila, 3)));
-txtPuesto.setText(String.valueOf(modelo.getValueAt(fila, 4)));
-txtSalario.setText(String.valueOf(modelo.getValueAt(fila, 5)));
-txtIdentificacion.setEditable(false);  // TODO add your handling code here:
-    }//GEN-LAST:event_tblEmpleadosMouseClicked
+private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {
+    String id = txtIdentificacion.getText().trim();
+    if (id.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Ingrese una identificación para buscar.");
+        txtIdentificacion.requestFocus();
+        return;
+    }
 
+    Empleado emp = controlador.buscarPorIdentificacion(id);
+    if (emp == null) {
+        javax.swing.JOptionPane.showMessageDialog(this, "No se encontró ningún empleado con esa identificación.");
+        return;
+    }
+
+    txtIdentificacion.setText(emp.getIdentificacion());
+    txtNombre.setText(emp.getNombre());
+    txtCorreo.setText(emp.getCorreo());
+    seleccionarDepartamentoEnCombo(emp.getDepartamento());
+    txtPuesto.setText(emp.getPuesto());
+    txtSalario.setText(String.valueOf(emp.getSalario()));
+    txtIdentificacion.setEditable(false);
+}
+
+private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {
+    Empleado emp = construirEmpleadoDesdeFormulario();
+    if (emp == null) {
+        return;
+    }
+
+    if (controlador.actualizarEmpleado(emp)) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Empleado modificado correctamente.");
+        actualizarTabla();
+        limpiarCampos();
+    } else {
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "No se pudo modificar. Verifique que el empleado exista.",
+                "Error",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+        );
+    }
+}
+
+private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {
+    String id = txtIdentificacion.getText().trim();
+    if (id.isEmpty()) {
+        int fila = tblEmpleados.getSelectedRow();
+        if (fila >= 0) {
+            id = String.valueOf(tblEmpleados.getModel().getValueAt(fila, 0)).trim();
+        }
+    }
+
+    if (id.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un empleado en la tabla o ingrese su identificación.");
+        return;
+    }
+
+    int opcion = javax.swing.JOptionPane.showConfirmDialog(
+            this,
+            "¿Está seguro de eliminar al empleado con identificación " + id + "?",
+            "Confirmar eliminación",
+            javax.swing.JOptionPane.YES_NO_OPTION
+    );
+
+    if (opcion == javax.swing.JOptionPane.YES_OPTION) {
+        if (controlador.eliminarEmpleado(id)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Empleado eliminado correctamente.");
+            actualizarTabla();
+            limpiarCampos();
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "No se encontró el empleado a eliminar.");
+        }
+    }
+}
+
+private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {
+    limpiarCampos();
+}
+
+private void tblEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {
+    int fila = tblEmpleados.getSelectedRow();
+    if (fila < 0) {
+        return;
+    }
+
+    javax.swing.table.TableModel modelo = tblEmpleados.getModel();
+    txtIdentificacion.setText(String.valueOf(modelo.getValueAt(fila, 0)));
+    txtNombre.setText(String.valueOf(modelo.getValueAt(fila, 1)));
+    txtCorreo.setText(String.valueOf(modelo.getValueAt(fila, 2)));
+    seleccionarDepartamentoEnCombo(String.valueOf(modelo.getValueAt(fila, 3)));
+    txtPuesto.setText(String.valueOf(modelo.getValueAt(fila, 4)));
+    txtSalario.setText(String.valueOf(modelo.getValueAt(fila, 5)));
+    txtIdentificacion.setEditable(false);
+}
     /**
      * @param args the command line arguments
      */
