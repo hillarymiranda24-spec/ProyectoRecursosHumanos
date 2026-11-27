@@ -1,4 +1,4 @@
-package com.mycompany.proyectorecursoshumanos;
+package com.mycompany.proyectorecursoshumanos.logica;
 
 /**
  * Clase para validar los datos ingresados en el formulario.

@@ -2,7 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.proyectorecursoshumanos;
+package com.mycompany.proyectorecursoshumanos.vista;
+
+import com.mycompany.proyectorecursoshumanos.logica.Validaciones;
+import com.mycompany.proyectorecursoshumanos.logica.ControladorRH;
+import com.mycompany.proyectorecursoshumanos.modelo.Empleado;
 
 /**
  *
